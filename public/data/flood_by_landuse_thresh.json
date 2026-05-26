@@ -1,0 +1,70 @@
+{
+  "method": "threshold",
+  "flood_layer": "flood_thresh",
+  "classes": [
+    {
+      "code": "A",
+      "label": "เกษตรกรรม",
+      "color": "#a8d5a2",
+      "flood_km2": 522.4433,
+      "flood_rai": 326527.1,
+      "total_km2": 522.4433,
+      "total_rai": 326527.1,
+      "pct_flooded": 100.0
+    },
+    {
+      "code": "M",
+      "label": "เบ็ดเตล็ด",
+      "color": "#bdbdbd",
+      "flood_km2": 8.6284,
+      "flood_rai": 5392.7,
+      "total_km2": 8.6284,
+      "total_rai": 5392.7,
+      "pct_flooded": 100.0
+    },
+    {
+      "code": "W",
+      "label": "แหล่งน้ำ",
+      "color": "#1565c0",
+      "flood_km2": 7.9543,
+      "flood_rai": 4971.4,
+      "total_km2": 7.9543,
+      "total_rai": 4971.4,
+      "pct_flooded": 100.0
+    },
+    {
+      "code": "U",
+      "label": "ชุมชน / สิ่งปลูกสร้าง",
+      "color": "#ef9a9a",
+      "flood_km2": 0.7051,
+      "flood_rai": 440.7,
+      "total_km2": 0.7051,
+      "total_rai": 440.7,
+      "pct_flooded": 100.0
+    },
+    {
+      "code": "F",
+      "label": "ป่าไม้",
+      "color": "#2e7d32",
+      "flood_km2": 0.0,
+      "flood_rai": 0.0,
+      "total_km2": 0.0,
+      "total_rai": 0.0,
+      "pct_flooded": 0
+    },
+    {
+      "code": "M+A",
+      "label": "เบ็ดเตล็ด + เกษตรกรรม",
+      "color": "#c8e6c9",
+      "flood_km2": 0.0,
+      "flood_rai": 0.0,
+      "total_km2": 0.0,
+      "total_rai": 0.0,
+      "pct_flooded": 0
+    }
+  ],
+  "summary": {
+    "total_flooded_km2": 539.7311,
+    "total_flooded_rai": 337331.9
+  }
+}
