@@ -3,7 +3,7 @@
 /**
  * StatsPanel — แสดงตารางพื้นที่น้ำท่วมแยกตาม Land Use
  * ข้อมูลจาก /data/flood_by_landuse.json (คำนวณจาก QGIS)
- * Toggle ระหว่าง Threshold (−17 dB) และ RF Classification
+ * แสดงเฉพาะ RF Classification
  */
 
 import { useEffect, useState } from 'react';
@@ -29,20 +29,11 @@ interface MethodData {
 }
 
 interface FloodStats {
-  threshold: MethodData;
   rf_classification: MethodData;
 }
 
-type Method = 'threshold' | 'rf_classification';
-
-const METHOD_LABELS: Record<Method, string> = {
-  threshold:         'Threshold −17 dB',
-  rf_classification: 'RF Classification',
-};
-
 export default function StatsPanel() {
   const [data, setData]       = useState<FloodStats | null>(null);
-  const [method, setMethod]   = useState<Method>('rf_classification');
   const [open, setOpen]       = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -55,7 +46,7 @@ export default function StatsPanel() {
 
   if (!data) return null;
 
-  const current   = data[method];
+  const current   = data.rf_classification;
   const maxFlood  = Math.max(...current.classes.map((c) => c.flood_km2));
   const classes   = expanded
     ? current.classes
@@ -91,22 +82,6 @@ export default function StatsPanel() {
             <button onClick={() => setOpen(false)} className="text-white/70 hover:text-white">
               <X size={13} />
             </button>
-          </div>
-
-          {/* method toggle */}
-          <div className="flex gap-1 p-2 bg-blue-50/60">
-            {(Object.keys(METHOD_LABELS) as Method[]).map((m) => (
-              <button
-                key={m}
-                onClick={() => setMethod(m)}
-                className={`flex-1 rounded-md border py-1 text-[10px] font-medium transition-colors
-                            ${method === m
-                              ? 'border-blue-500 bg-blue-600 text-white'
-                              : 'border-blue-200 bg-white text-blue-500 hover:border-blue-400'}`}
-              >
-                {METHOD_LABELS[m]}
-              </button>
-            ))}
           </div>
 
           {/* summary */}

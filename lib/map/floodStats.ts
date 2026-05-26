@@ -6,10 +6,8 @@ import { queryRasterValue } from './rasterStore';
 import * as turf from '@turf/turf';
 
 export interface FloodStatResult {
-  thresholdFlooded: number;        // จำนวนพิกเซล (threshold)
   classificationFlooded: number;   // จำนวนพิกเซล (classification)
   totalPixels: number;
-  thresholdPercent: number;        // %
   classificationPercent: number;   // %
 }
 
@@ -26,7 +24,6 @@ export function calculateFloodStats(
     const [minLng, minLat, maxLng, maxLat] = bbox;
 
     let totalPoints = 0;
-    let thresholdFlooded = 0;
     let classificationFlooded = 0;
 
     // Sample points บนกริด ภายในขอบเขต
@@ -42,12 +39,6 @@ export function calculateFloodStats(
 
         totalPoints++;
 
-        // Query ค่า threshold flood
-        const thresholdVal = queryRasterValue('flood_threshold', lng, lat);
-        if (thresholdVal != null && thresholdVal >= 1) {
-          thresholdFlooded++;
-        }
-
         // Query ค่า classification flood
         const classVal = queryRasterValue('flood_classification', lng, lat);
         if (classVal != null && classVal >= 1) {
@@ -56,23 +47,18 @@ export function calculateFloodStats(
       }
     }
 
-    const thresholdPercent = totalPoints > 0 ? (thresholdFlooded / totalPoints) * 100 : 0;
     const classificationPercent = totalPoints > 0 ? (classificationFlooded / totalPoints) * 100 : 0;
 
     return {
-      thresholdFlooded,
       classificationFlooded,
       totalPixels: totalPoints,
-      thresholdPercent,
       classificationPercent,
     };
   } catch (err) {
     console.warn('[floodStats] calculate error:', err);
     return {
-      thresholdFlooded: 0,
       classificationFlooded: 0,
       totalPixels: 0,
-      thresholdPercent: 0,
       classificationPercent: 0,
     };
   }

@@ -2,11 +2,11 @@
 
 /**
  * AmphoeStats — แสดงสัดส่วนน้ำท่วมในอำเภอที่เลือก
- * ทั้ง Threshold และ Classification methods
+ * แสดง RF Classification method
  */
 
 import { useEffect, useState, useMemo } from 'react';
-import { Droplets, TrendingUp, X, Loader2 } from 'lucide-react';
+import { Droplets, X, Loader2 } from 'lucide-react';
 import * as turf from '@turf/turf';
 import type { AmphoeFeature } from '@/components/filters/SearchBox';
 import { calculateFloodStats, type FloodStatResult } from '@/lib/map/floodStats';
@@ -100,9 +100,6 @@ export default function AmphoeStats({ feature }: Props) {
 
   if (!feature || !visible) return null;
 
-  const thresholdAreaKm2 = stats
-    ? (stats.thresholdPercent / 100) * amphoeAreaKm2
-    : 0;
   const classAreaKm2 = stats
     ? (stats.classificationPercent / 100) * amphoeAreaKm2
     : 0;
@@ -160,49 +157,6 @@ export default function AmphoeStats({ feature }: Props) {
 
         {!loading && stats && (
           <>
-            {/* Threshold Method */}
-            <div className="space-y-1.5">
-              <div className="flex items-center gap-3">
-                <div className="relative shrink-0">
-                  <DonutChart percent={stats.thresholdPercent} color="#3b82f6" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-[10px] font-bold text-blue-600 tabular-nums">
-                      {stats.thresholdPercent.toFixed(1)}%
-                    </span>
-                  </div>
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-[11px] font-semibold text-slate-700">
-                    Threshold (−17 dB)
-                  </div>
-                  <div className="text-[10px] text-slate-500 mt-0.5">
-                    {thresholdAreaKm2.toLocaleString('th-TH', {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}{' '}
-                    ตร.กม.
-                  </div>
-                  <div className="text-[9px] text-slate-400">
-                    ≈{' '}
-                    {(thresholdAreaKm2 * 625).toLocaleString('th-TH', {
-                      maximumFractionDigits: 0,
-                    })}{' '}
-                    ไร่
-                  </div>
-                </div>
-              </div>
-              {/* Progress bar */}
-              <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-1000 ease-out"
-                  style={{ width: `${Math.min(stats.thresholdPercent, 100)}%` }}
-                />
-              </div>
-            </div>
-
-            <div className="border-t border-slate-100" />
-
-            {/* Classification Method */}
             <div className="space-y-1.5">
               <div className="flex items-center gap-3">
                 <div className="relative shrink-0">
@@ -242,20 +196,7 @@ export default function AmphoeStats({ feature }: Props) {
               </div>
             </div>
 
-            {/* Comparison */}
             <div className="pt-1.5 border-t border-blue-100">
-              <div className="flex items-center gap-1.5 text-[10px] text-slate-500">
-                <TrendingUp size={11} className="text-slate-400" />
-                <span>
-                  ความแตกต่าง:{' '}
-                  <strong className="text-slate-700">
-                    {Math.abs(
-                      stats.thresholdPercent - stats.classificationPercent
-                    ).toFixed(1)}
-                    %
-                  </strong>
-                </span>
-              </div>
               <div className="text-[9px] text-slate-300 mt-1">
                 จาก {stats.totalPixels.toLocaleString()} sample points
               </div>
