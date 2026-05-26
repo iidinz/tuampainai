@@ -27,7 +27,7 @@ interface ActiveLayer {
 }
 
 const DEFAULT_ACTIVE: ActiveLayer[] = [
-  { id: 'flood_threshold', opacity: 0.8, type: 'raster' },
+  { id: 'flood_classification', opacity: 0.8, type: 'raster' },
 ];
 
 // colormap ที่ใช้แต่ละ raster layer (georaster)
@@ -83,7 +83,7 @@ export default function MapView() {
             if (id in PNG_FILES) {
               return (
                 <PngRasterLayer
-                  key={id}
+                  key={`${basemap}-${id}`}
                   id={id as PngLayerId}
                   opacity={opacity}
                 />
@@ -92,7 +92,7 @@ export default function MapView() {
 
             return (
               <RasterLayer
-                key={id}
+                key={`${basemap}-${id}`}
                 id={id as RasterId}
                 opacity={opacity}
                 colormap={RASTER_COLORMAPS[id as RasterId]}
@@ -105,7 +105,7 @@ export default function MapView() {
           .filter((l) => l.type === 'vector')
           .map(({ id, opacity }) => (
             <VectorLayer
-              key={id}
+              key={`${basemap}-${id}`}
               id={id as VectorId}
               opacity={opacity}
             />
@@ -115,7 +115,7 @@ export default function MapView() {
         <ClickInspector />
 
         {/* ── Amphoe layer (selected district boundary) ─────────────────── */}
-        <AmphoeLayer feature={selectedAmphoe} />
+        <AmphoeLayer key={basemap} feature={selectedAmphoe} />
       </Map>
 
       {/* ── UI overlays ──────────────────────────────────────────────────── */}
