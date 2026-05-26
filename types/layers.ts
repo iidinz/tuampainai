@@ -12,7 +12,7 @@ export type VectorLayerId =
 
 export type LayerId = RasterLayerId | VectorLayerId;
 
-export type LayerFormat = 'geotiff' | 'tile' | 'geojson' | 'shapefile' | 'cog';
+export type LayerFormat = 'geotiff' | 'png' | 'tile' | 'geojson' | 'shapefile' | 'cog';
 
 export interface LayerConfig {
   id: LayerId;

@@ -110,7 +110,9 @@ export default function LayerControlPanel({
                       // badge แสดง format ของ layer
                       const badge = layer.layerType === 'vector'
                         ? 'GeoJSON'
-                        : layer.format === 'tile' ? 'TILE' : 'TIF';
+                        : layer.format === 'tile' ? 'TILE'
+                          : layer.format === 'png' ? 'PNG'
+                            : 'TIF';
                       const badgeColor = layer.layerType === 'vector'
                         ? 'bg-green-100 text-green-600'
                         : layer.format === 'tile'

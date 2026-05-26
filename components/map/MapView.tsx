@@ -4,11 +4,13 @@ import { useRef, useCallback, useState } from 'react';
 import Map, { NavigationControl, ScaleControl, type MapRef } from 'react-map-gl/maplibre';
 import { STUDY_CENTER, DEFAULT_ZOOM } from '@/lib/map/constants';
 import type { RasterId, VectorId } from '@/lib/map/constants';
+import { PNG_FILES } from '@/lib/map/constants';
 import { LIGHT_STYLE, SATELLITE_STYLE } from '@/lib/map/style';
 import SearchBox, { type AmphoeFeature } from '@/components/filters/SearchBox';
 import Legend from './Legend';
 import LayerControlPanel from './LayerControlPanel';
 import RasterLayer, { COLORMAPS } from './RasterLayer';
+import PngRasterLayer, { type PngLayerId } from './PngRasterLayer';
 import VectorLayer from './VectorLayer';
 import ClickInspector from './ClickInspector';
 import AmphoeLayer from './AmphoeLayer';
@@ -77,14 +79,26 @@ export default function MapView() {
         {/* ── GeoTIFF raster layers (georaster) ────────────────────────── */}
         {activeLayers
           .filter((l) => l.type === 'raster')
-          .map(({ id, opacity }) => (
-            <RasterLayer
-              key={id}
-              id={id as RasterId}
-              opacity={opacity}
-              colormap={RASTER_COLORMAPS[id as RasterId]}
-            />
-          ))}
+          .map(({ id, opacity }) => {
+            if (id in PNG_FILES) {
+              return (
+                <PngRasterLayer
+                  key={id}
+                  id={id as PngLayerId}
+                  opacity={opacity}
+                />
+              );
+            }
+
+            return (
+              <RasterLayer
+                key={id}
+                id={id as RasterId}
+                opacity={opacity}
+                colormap={RASTER_COLORMAPS[id as RasterId]}
+              />
+            );
+          })}
 
         {/* ── Vector layers (GeoJSON) ───────────────────────────────────── */}
         {activeLayers

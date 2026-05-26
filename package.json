@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "generate:raster-overlays": "node scripts/generate-raster-overlays.mjs",
     "start": "next start",
     "lint": "next lint"
   },

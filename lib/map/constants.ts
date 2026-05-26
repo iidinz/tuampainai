@@ -49,10 +49,38 @@ export const RASTER_FILES = {
   flood_classification: '/data/raster/flood_rf_result.tif',
 } as const;
 
-export const PNG_FILES: Record<string, {
+export const PNG_FILES = {
+  flood_threshold: {
+    url: '/data/raster/flood_thresh_overlay.png',
+    extent: [
+      100.24319734221396,
+      14.109066027921045,
+      100.82309734221396,
+      14.665066027921046,
+    ],
+  },
+  sar_vv: {
+    url: '/data/raster/vv_s1a_overlay.png',
+    extent: [
+      100.24165243094859,
+      14.106550457999452,
+      100.82650956292416,
+      14.673371138034012,
+    ],
+  },
+  sar_vh: {
+    url: '/data/raster/vh_s1a_overlay.png',
+    extent: [
+      100.24165194153551,
+      14.106458925168509,
+      100.82659940663255,
+      14.673461531420813,
+    ],
+  },
+} as const satisfies Record<string, {
   url: string;
   extent: [number, number, number, number];
-}> = {};
+}>;
 
 // legacy alias
 export const DATA_FILES = RASTER_FILES;
