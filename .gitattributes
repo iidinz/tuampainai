@@ -1,0 +1,3 @@
+public/data/raster/vv_s1a.tif filter=lfs diff=lfs merge=lfs -text
+public/data/raster/vh_s1a.tif filter=lfs diff=lfs merge=lfs -text
+public/data/raster/flood_thresh.tif filter=lfs diff=lfs merge=lfs -text
