@@ -49,6 +49,11 @@ export const RASTER_FILES = {
   flood_classification: '/data/raster/flood_rf_result.tif',
 } as const;
 
+export const PNG_FILES: Record<string, {
+  url: string;
+  extent: [number, number, number, number];
+}> = {};
+
 // legacy alias
 export const DATA_FILES = RASTER_FILES;
 

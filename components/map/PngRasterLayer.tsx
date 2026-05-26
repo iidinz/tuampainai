@@ -38,8 +38,8 @@ export default function PngRasterLayer({ id, opacity = 0.8 }: Props) {
     const nativeMap = map.getMap();
 
     const safeRemove = () => {
-      try { if (nativeMap.getLayer(layerId))   nativeMap.removeLayer(layerId);   } catch (_) {}
-      try { if (nativeMap.getSource(sourceId)) nativeMap.removeSource(sourceId); } catch (_) {}
+      try { if (nativeMap.getLayer(layerId))   nativeMap.removeLayer(layerId);   } catch {}
+      try { if (nativeMap.getSource(sourceId)) nativeMap.removeSource(sourceId); } catch {}
     };
 
     const addToMap = () => {

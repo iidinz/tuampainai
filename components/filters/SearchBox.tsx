@@ -13,7 +13,7 @@ export interface AmphoeFeature {
     Shape_Leng: number;
     Shape_Area: number;
   };
-  geometry: GeoJSON.Geometry;
+  geometry: GeoJSON.Polygon | GeoJSON.MultiPolygon;
 }
 
 interface Props {

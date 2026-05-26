@@ -18,7 +18,7 @@ export interface FloodStatResult {
  * โดยใช้ sampling pixel จากขอบเขตพื้นที่
  */
 export function calculateFloodStats(
-  polygon: GeoJSON.Feature,
+  polygon: GeoJSON.Feature<GeoJSON.Polygon | GeoJSON.MultiPolygon>,
   sampleDensity: number = 32  // ระยะห่างระหว่าง sample points (เมตร)
 ): FloodStatResult {
   try {

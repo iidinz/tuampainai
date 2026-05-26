@@ -72,9 +72,9 @@ export default function VectorLayer({ id, opacity = 1 }: Props) {
     if (!nativeMap) return;
 
     const safeRemove = () => {
-      try { if (nativeMap && nativeMap.getLayer(lineId))    nativeMap.removeLayer(lineId);   } catch (_) {}
-      try { if (nativeMap && nativeMap.getLayer(fillId))    nativeMap.removeLayer(fillId);   } catch (_) {}
-      try { if (nativeMap && nativeMap.getSource(sourceId)) nativeMap.removeSource(sourceId);} catch (_) {}
+      try { if (nativeMap && nativeMap.getLayer(lineId))    nativeMap.removeLayer(lineId);   } catch {}
+      try { if (nativeMap && nativeMap.getLayer(fillId))    nativeMap.removeLayer(fillId);   } catch {}
+      try { if (nativeMap && nativeMap.getSource(sourceId)) nativeMap.removeSource(sourceId);} catch {}
     };
 
     const addLayers = () => {

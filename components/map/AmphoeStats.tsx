@@ -86,7 +86,7 @@ export default function AmphoeStats({ feature }: Props) {
     // ใช้ setTimeout เพื่อให้ UI ไม่ freeze ระหว่างคำนวณ
     const timeout = setTimeout(() => {
       try {
-        const result = calculateFloodStats(feature as GeoJSON.Feature);
+        const result = calculateFloodStats(feature);
         setStats(result);
       } catch (err) {
         console.warn('[AmphoeStats] calculate error:', err);

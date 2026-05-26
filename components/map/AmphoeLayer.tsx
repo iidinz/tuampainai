@@ -39,9 +39,9 @@ export default function AmphoeLayer({ feature }: Props) {
     if (!nativeMap) return;
 
     const cleanup = () => {
-      try { if (nativeMap && nativeMap.getLayer(LINE_ID)) nativeMap.removeLayer(LINE_ID); } catch (_) {}
-      try { if (nativeMap && nativeMap.getLayer(FILL_ID)) nativeMap.removeLayer(FILL_ID); } catch (_) {}
-      try { if (nativeMap && nativeMap.getSource(SOURCE_ID)) nativeMap.removeSource(SOURCE_ID); } catch (_) {}
+      try { if (nativeMap && nativeMap.getLayer(LINE_ID)) nativeMap.removeLayer(LINE_ID); } catch {}
+      try { if (nativeMap && nativeMap.getLayer(FILL_ID)) nativeMap.removeLayer(FILL_ID); } catch {}
+      try { if (nativeMap && nativeMap.getSource(SOURCE_ID)) nativeMap.removeSource(SOURCE_ID); } catch {}
     };
 
     if (!feature) {
