@@ -31,9 +31,10 @@ yarn-error.log*
 # vercel
 .vercel
 
-# large data files (host on cloud storage instead)
-public/data/raster/*.tif
-public/data/vector/lu_ayu_2568.geojson
+# large data files (exceed GitHub 100MB limit)
+public/data/raster/vv_s1a.tif
+public/data/raster/vh_s1a.tif
+public/data/raster/flood_thresh.tif
 public/data/*.gpkg
 public/data/*.gpkg-shm
 public/data/*.gpkg-wal
